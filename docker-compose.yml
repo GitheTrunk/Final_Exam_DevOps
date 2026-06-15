@@ -1,41 +1,47 @@
 services:
   loadbalancer:
-      image: nginx:latest
-      container_name: web-lb
+    image: nginx:latest
+    container_name: web-lb
+    ports:
+      - "8090:80"
+    volumes:
+      - ./nginx-lb.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
 
-      ports:
-        - "8090:80"
-
-      volumes:
-        - ./nginx-lb.conf:/etc/nginx/conf.d/default.conf
-
-      depends_on:
-        - web
   web:
     build: .
     container_name: springboot-web
-
     ports:
       - "8080:8080"
       - "2222:22"
-
     volumes:
       - .:/app
+    depends_on:
+      - mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: Hello@123
+    ports:
+      - "8082:80"
     depends_on:
       - mysql
 
   mysql:
     image: mysql:8.0
     container_name: mysql-db
-
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Hello@123
       MYSQL_DATABASE: bun_sengleang-db
-
     ports:
       - "3307:3306"
-
     volumes:
       - mysql_data:/var/lib/mysql
 
