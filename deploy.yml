@@ -6,7 +6,7 @@
 
     - name: Pull latest code
       shell: |
-        cd /app
+        cd /Users/macbookpro/.jenkins/workspace/football-terrain-rental
         git pull
 
     - name: Run tests
