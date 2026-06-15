@@ -18,6 +18,6 @@
     - name: Backup MySQL database
       shell: |
         cd /Users/macbookpro/Documents/I4_ITC/S2/DevOps/football-terrain-rental
-        mysqldump -h 127.0.0.1 -P 3307 \
+        /opt/homebrew/bin/mysqldump -h 127.0.0.1 -P 3307 \
         -u root -pHello@123 \
         bun_sengleang-db > backup.sql
