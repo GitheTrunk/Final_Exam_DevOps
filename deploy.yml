@@ -1,6 +1,7 @@
 ---
 - name: Deploy Spring Boot Application
   hosts: web
+  become: false
 
   tasks:
 
@@ -11,12 +12,12 @@
 
     - name: Run tests
       shell: |
-        cd /app
+        cd /Users/macbookpro/.jenkins/workspace/football-terrain-rental
         mvn test
 
     - name: Build project
       shell: |
-        cd /app
+        cd /Users/macbookpro/.jenkins/workspace/football-terrain-rental
         mvn clean package -DskipTests
 
     - name: Backup MySQL database
