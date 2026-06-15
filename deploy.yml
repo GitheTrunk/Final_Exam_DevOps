@@ -1,0 +1,27 @@
+---
+- name: Deploy Spring Boot Application
+  hosts: web
+
+  tasks:
+
+    - name: Pull latest code
+      shell: |
+        cd /app
+        git pull
+
+    - name: Run tests
+      shell: |
+        cd /app
+        mvn test
+
+    - name: Build project
+      shell: |
+        cd /app
+        mvn clean package -DskipTests
+
+    - name: Backup MySQL database
+      shell: |
+        cd /Users/macbookpro/Documents/I4_ITC/S2/DevOps/football-terrain-rental
+        mysqldump -h 127.0.0.1 -P 3307 \
+        -u root -pHello@123 \
+        bun_sengleang-db > backup.sql
