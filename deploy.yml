@@ -5,11 +5,6 @@
 
   tasks:
 
-    - name: Pull latest code
-      shell: |
-        cd /Users/macbookpro/.jenkins/workspace/football-terrain-rental
-        git pull
-
     - name: Run tests
       shell: |
         cd /Users/macbookpro/.jenkins/workspace/football-terrain-rental
